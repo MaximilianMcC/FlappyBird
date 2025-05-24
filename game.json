@@ -12,7 +12,19 @@
 		{
 			"DisplayName": "main",
 			"Things": [
-				
+				{
+					"DisplayName": "Player",
+					"Components": [
+						{
+							"$type": "Smoke.Transform, Smoke",
+							"Position": { "X": 100, "Y": 100 },
+							"Scale": { "X": 170, "Y": 130 }
+						},
+						{
+							"$type": "Player, FlappyBird"
+						}
+					]
+				}
 			]
 		}
 	]
