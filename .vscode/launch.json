@@ -1,0 +1,16 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Launch Game",
+			"type": "coreclr",
+			"request": "launch",
+			"preLaunchTask": "Build Game",
+			"program": "D:\\code\\c#\\raylib\\Smoke\\Runner\\bin\\Debug\\net8.0\\Runner.exe",
+			"cwd": "${workspaceFolder}",
+			"console": "internalConsole",
+
+			"args": ["./game.json"]
+		}
+	]
+}

@@ -1,0 +1,19 @@
+{
+	"Namespace": "FlappyBird",
+	"DisplayName": "Flappy Bird",
+	"RootPath": "D:/code/c#/raylib/FlappyBird",
+	"Version": "1.0.0",
+	"Restart": 0,
+	"Prefabs": [
+		
+	],
+	"CurrentSceneDisplayName": "main",
+	"Scenes": [
+		{
+			"DisplayName": "main",
+			"Things": [
+				
+			]
+		}
+	]
+}

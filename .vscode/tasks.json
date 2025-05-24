@@ -1,0 +1,27 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build All",
+			"command": "dotnet",
+			"type": "process",
+			"args": ["build"],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			// ts is the same as what the engine does
+			"label": "Build Game",
+			"command": "dotnet",
+			"type": "process",
+			"dependsOn": [ "Build All" ],
+			"args": [
+				"build",
+				"${workspaceFolder}/FlappyBird.csproj",
+				"--no-dependencies",
+				"-o",
+				"${workspaceFolder}/bin/assemblies"
+			],
+			"problemMatcher": "$msCompile"
+		}
+	]
+}
