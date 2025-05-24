@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <RootNamespace>FlappyBird</RootNamespace>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
