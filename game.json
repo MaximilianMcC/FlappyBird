@@ -5,8 +5,8 @@
 	"Version": "1.0.0",
 	"Restart": 0,
 	"WindowSize": {
-		"X": 668,
-		"Y": 1000
+		"X": 660,
+		"Y": 950
 	},
 	"Prefabs": [
 		
@@ -17,18 +17,18 @@
 			"DisplayName": "main",
 			"Things": [
 				{
-					"DisplayName": "Ui Handler",
-					"Components": [
-						{
-							"$type":"UiHandler, FlappyBird"
-						}
-					]
-				},
-				{
 					"DisplayName": "background",
 					"Components": [
 						{
 							"$type": "Background, FlappyBird"
+						}
+					]
+				},
+				{
+					"DisplayName": "Ui Handler",
+					"Components": [
+						{
+							"$type":"UiHandler, FlappyBird"
 						}
 					]
 				},

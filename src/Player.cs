@@ -21,6 +21,8 @@ class Player : RenderableComponent
 
 	public override void Update()
 	{
+		if (GameManager.Paused) return;
+
 		// Move the bird down (gravity)
 		acceleration += Gravity * DeltaTime;
 
