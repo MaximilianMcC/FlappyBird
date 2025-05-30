@@ -25,6 +25,14 @@
 					]
 				},
 				{
+					"DisplayName": "background",
+					"Components": [
+						{
+							"$type": "Background, FlappyBird"
+						}
+					]
+				},
+				{
 					"DisplayName": "Player",
 					"Components": [
 						{
