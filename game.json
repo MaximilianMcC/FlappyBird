@@ -4,6 +4,10 @@
 	"RootPath": "D:/code/c#/raylib/FlappyBird",
 	"Version": "1.0.0",
 	"Restart": 0,
+	"WindowSize": {
+		"X": 668,
+		"Y": 1000
+	},
 	"Prefabs": [
 		
 	],
@@ -13,12 +17,20 @@
 			"DisplayName": "main",
 			"Things": [
 				{
+					"DisplayName": "Ui Handler",
+					"Components": [
+						{
+							"$type":"UiHandler, FlappyBird"
+						}
+					]
+				},
+				{
 					"DisplayName": "Player",
 					"Components": [
 						{
-							"$type": "Smoke.Transform, Smoke",
+							"$type": "Smoke.Transform2D, Smoke",
 							"Position": { "X": 100, "Y": 100 },
-							"Scale": { "X": 170, "Y": 130 }
+							"Scale": { "X": 85, "Y": 65 }
 						},
 						{
 							"$type": "Player, FlappyBird"
