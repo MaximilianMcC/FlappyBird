@@ -33,6 +33,18 @@
 					]
 				},
 				{
+					"DisplayName": "pipe spawner",
+					"Components": [
+						{
+							"$type": "PipeSpawner, FlappyBird"
+						},
+						{
+							"$type": "Smoke.Timer, Smoke",
+							"Duration": 2.0
+						}
+					]
+				},
+				{
 					"DisplayName": "Player",
 					"Components": [
 						{
