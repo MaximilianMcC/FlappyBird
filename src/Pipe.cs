@@ -5,6 +5,7 @@ using Smoke;
 using static Smoke.Runtime;
 using static Smoke.AssetManager;
 using static Smoke.Graphics;
+using static Smoke.SceneManager;
 using Raylib_cs;
 
 class Pipe : RenderableComponent
@@ -16,16 +17,14 @@ class Pipe : RenderableComponent
 	private List<string> bottomPipeTextureKeys;
 	private int topPipeTextureIndex;
 	private int bottomPipeTextureIndex;
-	
 
-	// TODO: Use vectors
-	private float xPosition;
-	private float xWidth;
+	// TODO: do NOT do this
+	private Transform2D topPipe = new();
+	private Transform2D pipeGap = new();
+	private Transform2D bottomPipe = new();
 
-	//? Is actually 200 because its drawn on top/bottom (twice)
-	public float pipeGap = 100;
-	// TODO: Don't use int (cast)
-	public int PipeOffset = 200;
+	public float PipeGapSize = 100;
+	public int PipeOffsetRange = 100;
 
 	// Load all the pipe textures
 	public override void LoadType()
@@ -51,38 +50,59 @@ class Pipe : RenderableComponent
 
 		// Get a random offset (pipe y position)
 		//? Divided by 2 because we calculate from 0.5 on the y
-		pipeOffset = random.Next(-PipeOffset, PipeOffset);
+		pipeOffset = random.Next(-PipeOffsetRange, PipeOffsetRange);
 		pipeOffset /= 2;
 
-		// Spawn them somewhere offscreen
-		// in front of the player idk
-		xWidth = WindowWidth / 6;
-		xPosition = WindowWidth + xWidth;
+		// Calculate the pipe sizes
+		float width = WindowWidth / 6;
+		topPipe.Scale = new Vector2(width, WindowHeightHalf - (PipeGapSize + pipeOffset));
+		bottomPipe.Scale = new Vector2(width, WindowHeightHalf + (pipeOffset - PipeGapSize));
+		pipeGap.Scale = new Vector2(width, PipeGapSize);
+
+		// Set the pipes to spawn offscreen
+		// TODO: Make it so they can have a parent transform
+		float x = WindowWidth + width;
+		topPipe.Position = new Vector2(x, (WindowHeightHalf - PipeGapSize) - pipeOffset);
+		bottomPipe.Position = new Vector2(x, (WindowHeightHalf + PipeGapSize) - pipeOffset);
+		pipeGap.Position = new Vector2(x, WindowHeight - PipeGapSize);
 	}
 
 	public override void Update()
 	{
+		if (GameManager.Paused) return;
+
 		// Move the pipes
-		xPosition -= Speed * DeltaTime;
+		float movement = Speed * DeltaTime;
+		topPipe.Position.X -= movement;
+		pipeGap.Position.X -= movement;
+		bottomPipe.Position.X -= movement;
 
 		// Check for if it goes off screen and despawn
-		if (xPosition <= (0 - xWidth)) GameObject.RemoveFromScene();
+		if (topPipe.Position.X < (0 - topPipe.Scale.X))
+		{
+			GameObject.RemoveFromScene();
+			return;
+		}
+
+		// Check for player collision
+		CheckPlayerCollision();
+	}
+
+	private void CheckPlayerCollision()
+	{
+		// Get the players transform
+		// Transform2D player = CurrentScene.Get("Player").Get<Transform2D>();
+
+		// Check for if they're in 'range' of a pipe
+		// TODO: Use rectangles and raylib collision methods
+		// TODO: Add a collision component to smoke
+		// if (player.Position.X >= xPosition)
 	}
 
 	public override void Render2D()
 	{
-		// Calculate the sizes of the pipes
-		// TODO: Pre calculate/bake
-		float topSizeY = (WindowHeight / 2) - (pipeGap + pipeOffset);
-		float bottomSizeY = (WindowHeight / 2) + (pipeOffset - pipeGap);
-
-		// Calculate the positions of the pipes
-		// TODO: Pre calculate/bake
-		float topY = ((WindowHeight / 2) - pipeGap) - pipeOffset;
-		float bottomY = ((WindowHeight / 2) + pipeGap) - pipeOffset;
-
 		// Draw the pipes
-		DrawTexture(Textures[topPipeTextureKeys[topPipeTextureIndex]], new Vector2(xPosition, topY), new Vector2(xWidth, topSizeY), Origin.BottomCentre, 0f, Color.White);
-		DrawTexture(Textures[bottomPipeTextureKeys[bottomPipeTextureIndex]], new Vector2(xPosition, bottomY), new Vector2(xWidth, bottomSizeY), Origin.TopCentre, 0f, Color.White);
+		DrawTexture(Textures[topPipeTextureKeys[topPipeTextureIndex]], topPipe, Origin.BottomCentre, Color.White);
+		DrawTexture(Textures[bottomPipeTextureKeys[bottomPipeTextureIndex]], bottomPipe, Origin.TopCentre, Color.White);
 	}
 }
