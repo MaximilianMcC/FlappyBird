@@ -11,10 +11,17 @@ class Pipe : RenderableComponent
 {
 	public float Speed = 100f;
 
-	// TODO: Don't do this tuple garbage
 	private int pipeTextureIndex = 0;
+	private float pipeOffset;
+
+	// TODO: Use vectors
 	private float xPosition;
-	private float gap;
+	private float xWidth;
+
+	//? Is actually 200 because its drawn on top/bottom (twice)
+	public float pipeGap = 100;
+	// TODO: Don't use int (cast)
+	public int PipeOffset = 200;
 
 	// Load all the pipe textures
 	public override void LoadType()
@@ -31,25 +38,23 @@ class Pipe : RenderableComponent
 
 	public override void Start()
 	{
-		Console.WriteLine("kia ora");
+		// Comment addiction
 		Random random = new Random();
 
 		// Pick a texture set to use
 		// TODO: Don't do like this
 		pipeTextureIndex = random.Next(1, 3);
 
-		// See how tall the inside
-		// section of the pipe will be
-		// (where player goes)
+		// Get a random offset (pipe y position)
 		//? Divided by 2 because we calculate from 0.5 on the y
-		// gap = random.Next(100, 200);
-		gap = 200;
-		gap /= 2;
+		pipeOffset = random.Next(-PipeOffset, PipeOffset);
+		pipeOffset /= 2;
 
 		// Spawn them somewhere offscreen
 		// in front of the player idk
 		// TODO: Actually measure this value
 		xPosition = WindowWidth + 100;
+		xWidth = WindowWidth / 6;
 	}
 
 	public override void Update()
@@ -64,19 +69,18 @@ class Pipe : RenderableComponent
 	public override void Render2D()
 	{
 		// Calculate the sizes of the pipes
-		// TODO: Don't do in render
-		Vector2 size = new Vector2(
-			WindowWidth / 6,
-			(WindowHeight / 2) - gap
-		);
+		// TODO: Pre calculate/bake
+		float topSizeY = (WindowHeight / 2) - (pipeGap + pipeOffset);
+		float bottomSizeY = (WindowHeight / 2) + (pipeOffset - pipeGap);
 
 		// Calculate the positions of the pipes
-		Vector2 topPosition = new Vector2(xPosition, (WindowHeight / 2) - gap);
-		Vector2 bottomPosition = new Vector2(xPosition, (WindowHeight / 2) + gap);
+		// TODO: Pre calculate/bake
+		float topY = ((WindowHeight / 2) - pipeGap) - pipeOffset;
+		float bottomY = ((WindowHeight / 2) + pipeGap) - pipeOffset;
 
 		// Draw the pipes
-		DrawTexture(Textures[$"pipe{pipeTextureIndex}A"], topPosition, size, Origin.BottomCentre, 0f, Color.White);
-		DrawTexture(Textures[$"pipe{pipeTextureIndex}B"], bottomPosition, size, Origin.TopCentre, 0f, Color.White);
+		DrawTexture(Textures[$"pipe{pipeTextureIndex}A"], new Vector2(xPosition, topY), new Vector2(xWidth, topSizeY), Origin.BottomCentre, 0f, Color.White);
+		DrawTexture(Textures[$"pipe{pipeTextureIndex}B"], new Vector2(xPosition, bottomY), new Vector2(xWidth, bottomSizeY), Origin.TopCentre, 0f, Color.White);
 	}
 
 	public override void RenderDebug2D()
