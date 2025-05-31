@@ -56,9 +56,8 @@ class Pipe : RenderableComponent
 
 		// Spawn them somewhere offscreen
 		// in front of the player idk
-		// TODO: Actually measure this value
-		xPosition = WindowWidth + 100;
 		xWidth = WindowWidth / 6;
+		xPosition = WindowWidth + xWidth;
 	}
 
 	public override void Update()
@@ -67,7 +66,7 @@ class Pipe : RenderableComponent
 		xPosition -= Speed * DeltaTime;
 
 		// Check for if it goes off screen and despawn
-		// if (xPosition + )
+		if (xPosition <= (0 - xWidth)) GameObject.RemoveFromScene();
 	}
 
 	public override void Render2D()
