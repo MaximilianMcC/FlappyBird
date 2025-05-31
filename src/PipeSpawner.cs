@@ -1,5 +1,6 @@
 using System;
 using Smoke;
+using static Smoke.SceneManager;
 
 class PipeSpawner : UpdatableComponent
 {
@@ -12,6 +13,6 @@ class PipeSpawner : UpdatableComponent
 		if (timer.Done == false) return;
 
 		// Spawn a pipe
-		Console.WriteLine("Spawned pipe");
+		CurrentScene.CreatePrefab("pipe", "pipe");
 	}
 }

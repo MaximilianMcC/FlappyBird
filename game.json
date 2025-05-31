@@ -9,7 +9,14 @@
 		"Y": 950
 	},
 	"Prefabs": [
-		
+		{
+			"DisplayName": "pipe",
+			"Components": [
+				{
+					"$type": "Pipe, FlappyBird"
+				}
+			]
+		}
 	],
 	"CurrentSceneDisplayName": "main",
 	"Scenes": [
@@ -40,7 +47,8 @@
 						},
 						{
 							"$type": "Smoke.Timer, Smoke",
-							"Duration": 2.0
+							"Duration": 3.0,
+							"DoneOnStart": true
 						}
 					]
 				},
