@@ -10,9 +10,13 @@ using Raylib_cs;
 class Pipe : RenderableComponent
 {
 	public float Speed = 100f;
-
-	private int pipeTextureIndex = 0;
 	private float pipeOffset;
+
+	private List<string> topPipeTextureKeys;
+	private List<string> bottomPipeTextureKeys;
+	private int topPipeTextureIndex;
+	private int bottomPipeTextureIndex;
+	
 
 	// TODO: Use vectors
 	private float xPosition;
@@ -26,14 +30,13 @@ class Pipe : RenderableComponent
 	// Load all the pipe textures
 	public override void LoadType()
 	{
-		// Textures["pipe1A"] = LoadTexture("./assets/image/pipes/pipe1a.png");
-		// Textures["pipe1A"] = LoadTexture("./assets/image/pipes/pipe1b.png");
+		Textures["pipe1A"] = LoadTexture("./assets/image/pipe/pipe1a.png");
+		Textures["pipe2A"] = LoadTexture("./assets/image/pipe/pipe2a.png");
+		topPipeTextureKeys = ["pipe1A", "pipe2A"];
 
-		// Textures["pipe2A"] = LoadTexture("./assets/image/pipes/pipe2a.png");
-		// Textures["pipe2B"] = LoadTexture("./assets/image/pipes/pipe2b.png");
-
-		// Textures["pipe3A"] = LoadTexture("./assets/image/pipes/pipe3a.png");
-		// Textures["pipe3B"] = LoadTexture("./assets/image/pipes/pipe3b.png");
+		Textures["pipe1B"] = LoadTexture("./assets/image/pipe/pipe1b.png");
+		Textures["pipe2B"] = LoadTexture("./assets/image/pipe/pipe2b.png");
+		bottomPipeTextureKeys = ["pipe1B", "pipe2B"];
 	}
 
 	public override void Start()
@@ -43,7 +46,8 @@ class Pipe : RenderableComponent
 
 		// Pick a texture set to use
 		// TODO: Don't do like this
-		pipeTextureIndex = random.Next(1, 3);
+		topPipeTextureIndex = random.Next(0, topPipeTextureKeys.Count);
+		bottomPipeTextureIndex = random.Next(0, bottomPipeTextureKeys.Count);
 
 		// Get a random offset (pipe y position)
 		//? Divided by 2 because we calculate from 0.5 on the y
@@ -79,8 +83,8 @@ class Pipe : RenderableComponent
 		float bottomY = ((WindowHeight / 2) + pipeGap) - pipeOffset;
 
 		// Draw the pipes
-		DrawTexture(Textures[$"pipe{pipeTextureIndex}A"], new Vector2(xPosition, topY), new Vector2(xWidth, topSizeY), Origin.BottomCentre, 0f, Color.White);
-		DrawTexture(Textures[$"pipe{pipeTextureIndex}B"], new Vector2(xPosition, bottomY), new Vector2(xWidth, bottomSizeY), Origin.TopCentre, 0f, Color.White);
+		DrawTexture(Textures[topPipeTextureKeys[topPipeTextureIndex]], new Vector2(xPosition, topY), new Vector2(xWidth, topSizeY), Origin.BottomCentre, 0f, Color.White);
+		DrawTexture(Textures[bottomPipeTextureKeys[bottomPipeTextureIndex]], new Vector2(xPosition, bottomY), new Vector2(xWidth, bottomSizeY), Origin.TopCentre, 0f, Color.White);
 	}
 
 	public override void RenderDebug2D()
