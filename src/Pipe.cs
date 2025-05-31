@@ -86,9 +86,4 @@ class Pipe : RenderableComponent
 		DrawTexture(Textures[topPipeTextureKeys[topPipeTextureIndex]], new Vector2(xPosition, topY), new Vector2(xWidth, topSizeY), Origin.BottomCentre, 0f, Color.White);
 		DrawTexture(Textures[bottomPipeTextureKeys[bottomPipeTextureIndex]], new Vector2(xPosition, bottomY), new Vector2(xWidth, bottomSizeY), Origin.TopCentre, 0f, Color.White);
 	}
-
-	public override void RenderDebug2D()
-	{
-		DrawCircle(WindowSize / 2, 10f, Color.Magenta);
-	}
 }

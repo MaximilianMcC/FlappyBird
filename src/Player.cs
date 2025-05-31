@@ -40,9 +40,6 @@ class Player : RenderableComponent
 
 	public override void Render2D()
 	{
-		DrawCircle(Transform, 10f, Raylib_cs.Color.Lime);
 		DrawTexture(Textures["bird"], Transform, Origin.Centre, Raylib_cs.Color.White);
-
-		DrawText($"{acceleration}", Vector2.Zero, 75f, Raylib_cs.Color.Black);
 	}
 }
