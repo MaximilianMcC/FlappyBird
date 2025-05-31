@@ -4,7 +4,7 @@
     <RootNamespace>FlappyBird</RootNamespace>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   
@@ -12,7 +12,6 @@
 	<ProjectReference Include="../Smoke/Library/Smoke.csproj"/>
 	</ItemGroup>
 
-  <!-- Make this get added automatically somehow idk. or just don't forget -->
 	<ItemGroup>
 	<EmbeddedResource Include="./assets/**/*"></EmbeddedResource>
 	</ItemGroup>
