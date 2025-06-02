@@ -3,7 +3,7 @@
 	"DisplayName": "Microsoft Word",
 	"RootPath": "D:/code/c#/raylib/FlappyBird",
 	"Version": "1.0.0",
-	"Restart": 0,
+	"Restart": 2,
 	"WindowSize": {
 		"X": 660,
 		"Y": 950
@@ -12,6 +12,12 @@
 		{
 			"DisplayName": "pipe",
 			"Components": [
+				{
+					"$type": "Smoke.Sprite, Smoke"
+				},
+				{
+					"$type": "Smoke.Sprite, Smoke"
+				},
 				{
 					"$type": "Pipe, FlappyBird"
 				}
@@ -59,6 +65,9 @@
 							"$type": "Smoke.Transform2D, Smoke",
 							"Position": { "X": 100, "Y": 100 },
 							"Scale": { "X": 85, "Y": 65 }
+						},
+						{
+							"$type": "Smoke.Sprite, Smoke"
 						},
 						{
 							"$type": "Player, FlappyBird"

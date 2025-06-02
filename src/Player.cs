@@ -9,6 +9,8 @@ using static Smoke.Runtime;
 class Player : RenderableComponent
 {
 	public Transform2D Transform => GameObject.Get<Transform2D>();
+	private Sprite sprite => GameObject.Get<Sprite>();
+
 	public const float Gravity = 1500f;
 	public const float JumpForce = 500f;
 	private float acceleration;
@@ -18,6 +20,8 @@ class Player : RenderableComponent
 		// Load the player
 		Textures["bird"] = LoadTexture("./assets/image/bird.png");
 	}
+
+	public override void Start() => sprite.SetFrames("bird");
 
 	public override void Update()
 	{
@@ -40,6 +44,6 @@ class Player : RenderableComponent
 
 	public override void Render2D()
 	{
-		DrawTexture(Textures["bird"], Transform, Origin.Centre, Raylib_cs.Color.White);
+		DrawTexture(sprite.Texture, Transform, Origin.Centre, Raylib_cs.Color.White);
 	}
 }
