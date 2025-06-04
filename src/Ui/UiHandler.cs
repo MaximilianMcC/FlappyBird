@@ -8,18 +8,6 @@ using static Smoke.Input;
 
 class UiHandler : RenderableComponent
 {
-	public override void LoadType()
-	{
-		// Load and apply the font
-		Fonts["papyrus"] = LoadFont("./assets/font/papyrus.ttf");
-		FontKey = "papyrus";
-
-		// Load the icon
-		// TODO: Add this as a smoke feature (no raylib)
-		Images["icon"] = LoadImage("./assets/image/icon.png");
-		Raylib.SetWindowIcon(Images["icon"]);
-	}
-
 	public override void Update()
 	{
 		// Check for if we wanna pause
@@ -32,21 +20,27 @@ class UiHandler : RenderableComponent
 	{
 		// Say if the games paused
 		// TODO: Put stupid texture here
-		if (GameManager.Paused) DrawTextCentered("paused", WindowSize, Vector2.One, 75f, Color.Black);
+		if (GameManager.Paused)
+		{
+			DrawTextCentered("paused", WindowSize, Vector2.One, 75f, Color.Black);
+			return;
+		}
 
-		// Show the score
-		DrawText($"score: {GameManager.Score}", Vector2.One * 10, 75f, Color.Black);
-
-		// Say if the player is dead
+		// Depending on if we're dead
 		if (GameManager.GameOver)
 		{
 			DrawTextCentered("game over", WindowSize, Vector2.One, 100f, Color.Black);
 			DrawTextCentered($"\n\nscore: {GameManager.Score}", WindowSize, Vector2.One, 80f, Color.Black);
 		}
+		else
+		{
+			// Show the score
+			DrawText($"score: {GameManager.Score}", Vector2.One * 10, 0f, 75f, Color.Black);
+		}
 	}
 
 	public override void RenderDebug2D()
 	{
-		DrawText($"fps: {Raylib.GetFPS()}", new Vector2(10, 100), 100f, Color.Black);
+		DrawText($"fps: {Raylib.GetFPS()}", new Vector2(10, 100), 0f, 100f, Color.Black);
 	}
 }

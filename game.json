@@ -24,10 +24,32 @@
 			]
 		}
 	],
-	"CurrentSceneDisplayName": "main",
+	"CurrentSceneDisplayName": "menu",
 	"Scenes": [
 		{
-			"DisplayName": "main",
+			"DisplayName": "menu",
+			"Things": [
+				{
+					"DisplayName": "background",
+					"Components": [
+						{
+							"$type": "Background, FlappyBird",
+							"ScrollSpeed": -5
+						}
+					]
+				},
+				{
+					"DisplayName":"Menu Handler",
+					"Components": [
+						{
+							"$type": "Menu, FlappyBird"
+						}
+					]
+				}
+			]
+		},
+		{
+			"DisplayName": "game",
 			"Things": [
 				{
 					"DisplayName": "background",
