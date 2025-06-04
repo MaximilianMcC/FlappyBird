@@ -114,7 +114,7 @@ class Pipe : RenderableComponent
 		if (player.Transform.Overlaps(topPipe) || player.Transform.Overlaps(bottomPipe))
 		{
 			// Say the player is dead
-			player.Dead = true;
+			GameManager.GameOver = true;
 			return;
 		}
 

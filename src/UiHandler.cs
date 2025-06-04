@@ -15,7 +15,7 @@ class UiHandler : RenderableComponent
 		FontKey = "papyrus";
 
 		// Load the icon
-		// TODO: Add this as a smoke feature
+		// TODO: Add this as a smoke feature (no raylib)
 		Images["icon"] = LoadImage("./assets/image/icon.png");
 		Raylib.SetWindowIcon(Images["icon"]);
 	}
@@ -35,8 +35,14 @@ class UiHandler : RenderableComponent
 		if (GameManager.Paused) DrawTextCentered("paused", WindowSize, Vector2.One, 75f, Color.Black);
 
 		// Show the score
-		// TODO: Make it bounce around or something idk
 		DrawText($"score: {GameManager.Score}", Vector2.One * 10, 75f, Color.Black);
+
+		// Say if the player is dead
+		if (GameManager.GameOver)
+		{
+			DrawTextCentered("game over", WindowSize, Vector2.One, 100f, Color.Black);
+			DrawTextCentered($"\n\nscore: {GameManager.Score}", WindowSize, Vector2.One, 80f, Color.Black);
+		}
 	}
 
 	public override void RenderDebug2D()

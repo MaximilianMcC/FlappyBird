@@ -11,8 +11,6 @@ class Player : RenderableComponent
 	public Transform2D Transform => GameObject.Get<Transform2D>();
 	private Sprite sprite => GameObject.Get<Sprite>();
 
-	public bool Dead;
-
 	public const float Gravity = 1500f;
 	public const float JumpForce = 500f;
 	private float acceleration;
@@ -33,7 +31,7 @@ class Player : RenderableComponent
 		acceleration += Gravity * DeltaTime;
 
 		// Check for if we wanna jump (click or space or up arrow)
-		if (Dead == false && (
+		if (GameManager.GameOver == false && (
 			MouseClicked(Raylib_cs.MouseButton.Left) ||
 			KeyPressed(Raylib_cs.KeyboardKey.Space) ||
 			KeyPressed(Raylib_cs.KeyboardKey.Up)
@@ -46,6 +44,8 @@ class Player : RenderableComponent
 
 		// Update the players position
 		Transform.Position.Y += acceleration * DeltaTime;
+
+		// TODO: If the player goes offscreen then kill them
 	}
 
 	public override void Render2D()

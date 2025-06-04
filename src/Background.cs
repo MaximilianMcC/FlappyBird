@@ -24,9 +24,11 @@ class Background : RenderableComponent
 
 	public override void Update()
 	{
+		if (GameManager.Paused) return;
+
 		// Move the backgrounds across the screen
 		skyPosition += ScrollSpeed * DeltaTime;
-		groundPosition += (ScrollSpeed * 2f) * DeltaTime;
+		groundPosition += (ScrollSpeed * 1.5f) * DeltaTime;
 
 		// When the 'first' one goes fully out of
 		// frame then teleport it back to the start
