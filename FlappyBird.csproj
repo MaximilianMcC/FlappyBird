@@ -5,6 +5,9 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>disable</Nullable>
+
+	<!-- stop complaining about uninitialised fields -->
+	<NoWarn>$(NoWarn);0649</NoWarn>
   </PropertyGroup>
 
   
