@@ -11,6 +11,8 @@ class Player : RenderableComponent
 	public Transform2D Transform => GameObject.Get<Transform2D>();
 	private Sprite sprite => GameObject.Get<Sprite>();
 
+	public bool Dead;
+
 	public const float Gravity = 1500f;
 	public const float JumpForce = 500f;
 	private float acceleration;
@@ -31,7 +33,11 @@ class Player : RenderableComponent
 		acceleration += Gravity * DeltaTime;
 
 		// Check for if we wanna jump (click or space or up arrow)
-		if (MouseClicked(Raylib_cs.MouseButton.Left) || KeyPressed(Raylib_cs.KeyboardKey.Space) || KeyPressed(Raylib_cs.KeyboardKey.Up))
+		if (Dead == false && (
+			MouseClicked(Raylib_cs.MouseButton.Left) ||
+			KeyPressed(Raylib_cs.KeyboardKey.Space) ||
+			KeyPressed(Raylib_cs.KeyboardKey.Up)
+		))
 		{
 			// Move the bird up (jumping)
 			//? No delta time because it only happens once
@@ -44,6 +50,6 @@ class Player : RenderableComponent
 
 	public override void Render2D()
 	{
-		DrawTexture(sprite.Texture, Transform, Origin.Centre, Raylib_cs.Color.White);
+		DrawSprite(sprite, Transform, Raylib_cs.Color.White);
 	}
 }

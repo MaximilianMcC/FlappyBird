@@ -64,7 +64,7 @@
 						{
 							"$type": "Smoke.Transform2D, Smoke",
 							"Position": { "X": 100, "Y": 100 },
-							"Scale": { "X": 85, "Y": 65 }
+							"Size": { "X": 85, "Y": 65 }
 						},
 						{
 							"$type": "Smoke.Sprite, Smoke"

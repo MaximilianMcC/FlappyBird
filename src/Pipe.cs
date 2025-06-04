@@ -7,7 +7,6 @@ using static Smoke.AssetManager;
 using static Smoke.Graphics;
 using static Smoke.SceneManager;
 using Raylib_cs;
-using Force.DeepCloner;
 
 class Pipe : RenderableComponent
 {
@@ -61,11 +60,20 @@ class Pipe : RenderableComponent
 		pipeOffset = random.Next(-PipeOffsetRange, PipeOffsetRange);
 		pipeOffset /= 2;
 
+		// Give the pipes origins
+		topPipe.Origin = Origin.BottomCentre;
+		bottomPipe.Origin = Origin.TopCentre;
+		pipeGap.Origin = Origin.TopCentre;
+
 		// Calculate the pipe sizes
 		float width = WindowWidth / 6;
-		topPipe.Scale = new Vector2(width, WindowHeightHalf - (PipeGapSize + pipeOffset));
-		bottomPipe.Scale = new Vector2(width, WindowHeightHalf + (pipeOffset - PipeGapSize));
-		pipeGap.Scale = new Vector2(width, PipeGapSize * 2);
+		topPipe.Size = new Vector2(width, WindowHeightHalf - (PipeGapSize + pipeOffset));
+		bottomPipe.Size = new Vector2(width, WindowHeightHalf + (pipeOffset - PipeGapSize));
+
+		// Set the gap to have a tiny width so the
+		// player gets the score as they pass through
+		// the pipe, not the second it appears
+		pipeGap.Size = new Vector2(10, PipeGapSize * 2);
 
 		// Set the pipes to spawn offscreen
 		// TODO: Make it so they can have a parent transform
@@ -86,7 +94,7 @@ class Pipe : RenderableComponent
 		bottomPipe.Position.X -= movement;
 
 		// Check for if it goes off screen and despawn
-		if (topPipe.Position.X < (0 - topPipe.Scale.X))
+		if (topPipe.Position.X < (0 - topPipe.Size.X))
 		{
 			GameObject.RemoveFromScene();
 			return;
@@ -99,82 +107,33 @@ class Pipe : RenderableComponent
 	private void CheckPlayerCollision()
 	{
 		// Get the players transform
-		Transform2D player = CurrentScene.Get("Player").Get<Transform2D>();
+		// TODO: Maybe make this like private (don't call all the time)
+		Player player = CurrentScene.Get("Player").Get<Player>();
 
-		// Make collision rectangles for everything
-		// TODO: Add collisions to Smoke
-		Rectangle playerCollision = new Rectangle(ApplyOrigin(player, Origin.Centre).Position, player.Scale);
-		Rectangle topPipeCollision = new Rectangle(ApplyOrigin(topPipe, Origin.BottomCentre).Position, topPipe.Scale);
-		Rectangle bottomPipeCollision = new Rectangle(ApplyOrigin(bottomPipe, Origin.TopCentre).Position, bottomPipe.Scale);
-		Rectangle gapCollision = new Rectangle(ApplyOrigin(pipeGap, Origin.TopCentre).Position, pipeGap.Scale);
-
-		// TODO: Add collisions to Smoke
-		// Check for if we're colliding with a pipe section
-		if (
-			Raylib.CheckCollisionRecs(playerCollision, topPipeCollision) ||
-			Raylib.CheckCollisionRecs(playerCollision, bottomPipeCollision)
-		)
+		// Check for pipe collision
+		if (player.Transform.Overlaps(topPipe) || player.Transform.Overlaps(bottomPipe))
 		{
-			// Kill the player
-			Console.WriteLine("dead");
-			// debugPlayerColliding = true;
+			// Say the player is dead
+			player.Dead = true;
+			return;
 		}
 
-		// Check for if we're passing through the gap
-		if (Raylib.CheckCollisionRecs(playerCollision, gapCollision))
+		// Check for gap collision
+		if (BeenPassed == false && player.Transform.Overlaps(pipeGap))
 		{
+			// Say that we've passed the pipe
+			BeenPassed = true;
+
 			// Update the players score
 			GameManager.Score++;
 
-			// Say that we've passed this pipe
-			// since its one point per pipe
-			BeenPassed = true;
-			// debugPlayerColliding = false;
+			// TODO: Play a sound effect or something
 		}
 	}
 
 	public override void Render2D()
 	{
-		// Draw the pipes
-		DrawTexture(topPipeSprite.Texture, topPipe, Origin.BottomCentre, Color.White);
-		DrawTexture(bottomPipeSprite.Texture, bottomPipe, Origin.TopCentre, Color.White);
-	}
-
-	public override void RenderDebug2D()
-	{
-		Transform2D player = CurrentScene.Get("Player").Get<Transform2D>();
-		// 	DrawSquareOutline(ApplyOrigin(player, Origin.Centre), 4f, debugPlayerColliding ? Color.White : Color.Magenta);
-
-		// 	DrawSquareOutline(ApplyOrigin(pipeGap, Origin.TopCentre), 4f, Color.Magenta);
-		// 	DrawSquareOutline(ApplyOrigin(bottomPipe, Origin.TopCentre), 4f, Color.Green);
-
-
-		// Collision collision = GenerateCollision(player, Origin, Pipe, orign);
-
-		Collision collision = new Collision(player, Origin.TopLeft, pipeGap, Origin.TopCentre);
-		DrawSquare(collision.GetCollisionTransform(), Color.Beige);
-
-		Rectangle topPipeCollision = new Rectangle(ApplyOrigin(topPipe, Origin.BottomCentre).Position, topPipe.Scale);
-		Raylib.DrawRectangleLinesEx(topPipeCollision, 3f, Color.Magenta);
-
-		Rectangle bottomPipeCollision = new Rectangle(ApplyOrigin(bottomPipe, Origin.TopCentre).Position, bottomPipe.Scale);
-		Raylib.DrawRectangleLinesEx(bottomPipeCollision, 3f, Color.Magenta);
-
-		Rectangle playerCollision = new Rectangle(ApplyOrigin(player, Origin.Centre).Position, player.Scale);
-		Raylib.DrawRectangleLinesEx(playerCollision, 3f, Color.Magenta);
-	}
-
-
-	
-
-
-	// TODO: Don't do this
-	private Transform2D ApplyOrigin(Transform2D transform, Vector2 origin)
-	{
-		// TODO: Definitely don't do this
-		Transform2D newTransform = transform.DeepClone();
-
-		newTransform.Position -= (transform.Scale * origin);
-		return newTransform;
+		DrawSprite(topPipeSprite, topPipe, Color.White);
+		DrawSprite(bottomPipeSprite, bottomPipe, Color.White);
 	}
 }

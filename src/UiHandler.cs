@@ -33,5 +33,14 @@ class UiHandler : RenderableComponent
 		// Say if the games paused
 		// TODO: Put stupid texture here
 		if (GameManager.Paused) DrawTextCentered("paused", WindowSize, Vector2.One, 75f, Color.Black);
+
+		// Show the score
+		// TODO: Make it bounce around or something idk
+		DrawText($"score: {GameManager.Score}", Vector2.One * 10, 75f, Color.Black);
+	}
+
+	public override void RenderDebug2D()
+	{
+		DrawText($"fps: {Raylib.GetFPS()}", new Vector2(10, 100), 100f, Color.Black);
 	}
 }
