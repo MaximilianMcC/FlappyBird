@@ -35,12 +35,12 @@ class UiHandler : RenderableComponent
 		else
 		{
 			// Show the score
-			DrawText($"score: {GameManager.Score}", Vector2.One * 10, 0f, 75f, Color.Black);
+			DrawText($"score: {GameManager.Score}", Vector2.One * 10, Origin.TopLeft, 0f, 75f, Color.Black);
 		}
 	}
 
 	public override void RenderDebug2D()
 	{
-		DrawText($"fps: {Raylib.GetFPS()}", new Vector2(10, 100), 0f, 100f, Color.Black);
+		DrawText($"fps: {Raylib.GetFPS()}", new Vector2(10, 100), Origin.TopLeft, 0f, 100f, Color.Black);
 	}
 }

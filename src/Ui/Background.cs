@@ -9,6 +9,7 @@ class Background : RenderableComponent
 	public float ScrollSpeed = -50;
 	private float skyPosition = 0;
 	private float groundPosition = 0;
+	public bool Dark;
 
 	// TODO: Jst use a transform
 	private Vector2 groundSize;
@@ -46,5 +47,8 @@ class Background : RenderableComponent
 		// Draw both grounds
 		DrawTexture(Textures["ground"], new Vector2(groundPosition, WindowHeight - groundSize.Y), groundSize);
 		DrawTexture(Textures["ground"], new Vector2(groundPosition + WindowWidth, WindowHeight - groundSize.Y), groundSize);
+
+		// Draw a dark overlay
+		if (Dark) DrawSquare(Vector2.Zero, WindowSize, new Raylib_cs.Color(0, 0, 0, 64));
 	}
 }

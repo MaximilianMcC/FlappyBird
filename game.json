@@ -34,7 +34,8 @@
 					"Components": [
 						{
 							"$type": "Background, FlappyBird",
-							"ScrollSpeed": -5
+							"ScrollSpeed": -5,
+							"Dark": true
 						}
 					]
 				},
@@ -43,6 +44,24 @@
 					"Components": [
 						{
 							"$type": "Menu, FlappyBird"
+						},
+						{
+							"$type": "SplashText, FlappyBird",
+							"Texts": [
+								"hey repco",
+								"wow",
+								"shout out smoke",
+								"full release tomorrow",
+								"blud think hes minecraft",
+								"slacker",
+								"have you done the wordle",
+								"STREAK"
+							],
+							"Position": {
+								"X": 100,
+								"Y": 100
+							},
+							"FontSize": 50
 						}
 					]
 				}

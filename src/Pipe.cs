@@ -19,7 +19,7 @@ class Pipe : RenderableComponent
 	private Sprite topPipeSprite => GameObject.Get<Sprite>(0);
 	private Sprite bottomPipeSprite => GameObject.Get<Sprite>(1);
 
-	// TODO: do NOT do this
+	// TODO: do NOT do this in code (use json (or engine))
 	private Transform2D topPipe = new();
 	private Transform2D pipeGap = new();
 	private Transform2D bottomPipe = new();
