@@ -11,11 +11,12 @@
   </PropertyGroup>
 
   
+  
 	<ItemGroup>
-	<ProjectReference Include="../Smoke/Library/Smoke.csproj"/>
+		<ProjectReference Include="../Smoke/Library/Smoke.csproj"/>
 	</ItemGroup>
 
 	<ItemGroup>
-	<EmbeddedResource Include="./assets/**/*"></EmbeddedResource>
+		<EmbeddedResource Include="./assets/**/*"></EmbeddedResource>
 	</ItemGroup>
 </Project>
