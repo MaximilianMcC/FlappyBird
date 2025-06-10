@@ -12,14 +12,12 @@ class Menu : RenderableComponent
 
 	public override void LoadType()
 	{
+		// Load the icon
+		SetIcon("./assets/image/icon.png");
+
 		// Load and apply the font
 		Fonts["papyrus"] = LoadFont("./assets/font/papyrus.ttf");
 		FontKey = "papyrus";
-
-		// Load the icon
-		// TODO: Add this as a smoke feature (no raylib)
-		Images["icon"] = LoadImage("./assets/image/icon.png");
-		Raylib.SetWindowIcon(Images["icon"]);
 
 		// Load the menu logo thing
 		Textures["logo"] = LoadTexture("./assets/image/logo.png");
