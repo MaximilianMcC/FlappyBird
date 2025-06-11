@@ -8,7 +8,7 @@ class Menu : RenderableComponent
 {
 	// TODO: do in json
 	// TODO: Add support for "mathematical" transforms
-	private Transform2D logo = new Transform2D();
+	private Transform2D logo => GameObject.Get<Transform2D>();
 
 	public override void LoadType()
 	{
@@ -32,7 +32,7 @@ class Menu : RenderableComponent
 
 		// Set the splash text to be on
 		// the corner of the menu image
-		GameObject.Get<SplashText>().Position = logo.PositionMax - new Vector2(0, logo.Size.Y);
+		GameObject.Get<SplashText>().Position = logo.BottomCorner - new Vector2(0, logo.Size.Y);
 	}
 
 	public override void Render2D()

@@ -23,7 +23,7 @@
 				}
 			]
 		}
-	],
+	], 
 	"CurrentSceneDisplayName": "menu",
 	"Scenes": [
 		{
@@ -46,6 +46,9 @@
 							"$type": "Menu, FlappyBird"
 						},
 						{
+							"$type":"Smoke.Transform2D, Smoke"
+						},
+						{
 							"$type": "SplashText, FlappyBird",
 							"Texts": [
 								"hey repco",
@@ -55,13 +58,36 @@
 								"blud think hes minecraft",
 								"slacker",
 								"have you done the wordle",
-								"STREAK"
+								"STREAK",
+								"cooperclan",
+								"lol",
+								"chicken jokey!",
+								"am I livestock",
+								"ctrl+g",
+								"tdnmtm"
 							],
 							"Position": {
 								"X": 100,
 								"Y": 100
 							},
 							"FontSize": 50
+						}
+					]
+				},
+				{
+					"DisplayName": "start button",
+					"Components": [
+						{
+							"$type": "Button, FlappyBird",
+							"Text": "play",
+							"FontSize": 60
+						},
+						{
+							"$type":"Smoke.Transform2D, Smoke",
+							"Origin": {
+								"X": 0.5,
+								"Y": 0.5
+							}
 						}
 					]
 				}
