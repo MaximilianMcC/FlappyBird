@@ -119,7 +119,7 @@ class Pipe : RenderableComponent
 		}
 
 		// Check for gap collision
-		if (BeenPassed == false && player.Transform.Overlaps(pipeGap))
+		if ((BeenPassed == false && player.Transform.Overlaps(pipeGap)) && GameManager.GameOver == false)
 		{
 			// Say that we've passed the pipe
 			BeenPassed = true;
