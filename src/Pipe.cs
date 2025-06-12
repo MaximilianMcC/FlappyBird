@@ -10,7 +10,7 @@ using Raylib_cs;
 
 class Pipe : RenderableComponent
 {
-	public float Speed = 100f;
+	public float Speed = 130f;
 	public bool BeenPassed;
 	private float pipeOffset;
 
@@ -24,8 +24,8 @@ class Pipe : RenderableComponent
 	private Transform2D pipeGap = new();
 	private Transform2D bottomPipe = new();
 
-	public float PipeGapSize = 100;
-	public int PipeOffsetRange = 100;
+	public float PipeGapSize = 80;
+	public int PipeOffsetRange = 450;
 
 	// Load all the pipe textures
 	public override void LoadType()

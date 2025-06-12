@@ -11,8 +11,8 @@ class Player : RenderableComponent
 	public Transform2D Transform => GameObject.Get<Transform2D>();
 	private Sprite sprite => GameObject.Get<Sprite>();
 
-	public const float Gravity = 1500f;
-	public const float JumpForce = 500f;
+	public const float Gravity = 1300f;
+	public const float JumpForce = 400f;
 	private float acceleration;
 
 	public override void LoadType()
@@ -21,7 +21,11 @@ class Player : RenderableComponent
 		Textures["bird"] = LoadTexture("./assets/image/bird.png");
 	}
 
-	public override void Start() => sprite.SetFrames("bird");
+	public override void Start()
+	{
+		sprite.SetFrames("bird");
+		Transform.Position.X = WindowWidthHalf;
+	}
 
 	public override void Update()
 	{
