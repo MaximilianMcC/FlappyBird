@@ -3,17 +3,28 @@ using System.Numerics;
 using Raylib_cs;
 using Smoke;
 using static Smoke.AssetManager;
+using static Smoke.SceneManager;
 using static Smoke.Graphics;
 using static Smoke.Input;
 
 class UiHandler : RenderableComponent
 {
+	private Button restartButton => CurrentScene.Get("RestartButton").Get<Button>();
+
 	public override void Update()
 	{
 		// Check for if we wanna pause
 		// TODO: Make it pause on any key thats not a jump one
 		// TODO: Make it pause if focus is lost
 		if (KeyPressed(KeyboardKey.Escape)) GameManager.Paused = !GameManager.Paused;
+
+		// Check for if we wanna restart the game
+		if (restartButton.Clicked && GameManager.GameOver)
+		{
+			// Hide the restart button and restart the game
+			restartButton.Enabled = false;
+			GameManager.StartGame();
+		}
 	}
 
 	public override void Render2D()

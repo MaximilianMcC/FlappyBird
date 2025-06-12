@@ -11,7 +11,8 @@ class Button : RenderableComponent
 	public float FontSize;
 	private Transform2D button => GameObject.Get<Transform2D>();
 	private bool hovered;
-
+	public bool Clicked { get; private set; }
+	
 	public override void Start()
 	{
 		// Dynamically size the button
@@ -22,11 +23,14 @@ class Button : RenderableComponent
 
 	public override void Update()
 	{
+		// Check for if we gotta reset the clicked state
+		if (Clicked) Clicked = false;
+ 
 		// Check for if we're hovering over the button
 		if (button.Contains(MousePosition()))
 		{
 			// Toggle the cursor if needed
-			if (hovered == false)
+			if (hovered == false || Clicked == true)
 			{
 				hovered = true;
 				Raylib.SetMouseCursor(MouseCursor.PointingHand);
@@ -47,9 +51,8 @@ class Button : RenderableComponent
 			// Run the button idk
 			// TODO: Run a method or update a public bool
 			Raylib.SetMouseCursor(MouseCursor.Default);
-			SceneManager.SetScene("game");
+			Clicked = true;
 		}
-
 	}
 
 	public override void Render2D()

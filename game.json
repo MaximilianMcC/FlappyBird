@@ -75,7 +75,7 @@
 					]
 				},
 				{
-					"DisplayName": "start button",
+					"DisplayName": "PlayButton",
 					"Components": [
 						{
 							"$type": "Button, FlappyBird",
@@ -138,6 +138,24 @@
 						},
 						{
 							"$type": "Player, FlappyBird"
+						}
+					]
+				},
+				{
+					"DisplayName": "RestartButton",
+					"Components": [
+						{
+							"$type": "Button, FlappyBird",
+							"Text": "restart",
+							"FontSize": 60,
+							"Enabled": false
+						},
+						{
+							"$type":"Smoke.Transform2D, Smoke",
+							"Origin": {
+								"X": 0.5,
+								"Y": 0.5
+							}
 						}
 					]
 				}

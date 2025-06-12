@@ -45,7 +45,10 @@ class Player : RenderableComponent
 		// Update the players position
 		Transform.Position.Y += acceleration * DeltaTime;
 
-		// TODO: If the player goes offscreen then kill them
+		// If the player goes offscreen then kill them
+		// TODO: Account for origin
+		if (Transform.Position.Y > WindowHeight) GameManager.GameOver = true;
+		if (Transform.Position.Y < 0) GameManager.GameOver = true;
 	}
 
 	public override void Render2D()

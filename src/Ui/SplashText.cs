@@ -3,7 +3,6 @@ using Raylib_cs;
 using System.Numerics;
 using Smoke;
 using static Smoke.Graphics;
-using static Smoke.Runtime;
 
 class SplashText : RenderableComponent
 {

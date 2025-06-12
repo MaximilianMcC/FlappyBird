@@ -1,14 +1,17 @@
 using Smoke;
 using static Smoke.Graphics;
 using static Smoke.AssetManager;
+using static Smoke.SceneManager;
 using Raylib_cs;
 using System.Numerics;
+using System;
 
 class Menu : RenderableComponent
 {
 	// TODO: do in json
 	// TODO: Add support for "mathematical" transforms
 	private Transform2D logo => GameObject.Get<Transform2D>();
+	private Button playButton => CurrentScene.Get("PlayButton").Get<Button>();
 
 	public override void LoadType()
 	{
@@ -21,6 +24,8 @@ class Menu : RenderableComponent
 
 		// Load the menu logo thing
 		Textures["logo"] = LoadTexture("./assets/image/logo.png");
+
+		
 	}
 
 	public override void Start()
@@ -33,6 +38,11 @@ class Menu : RenderableComponent
 		// Set the splash text to be on
 		// the corner of the menu image
 		GameObject.Get<SplashText>().Position = logo.BottomCorner - new Vector2(0, logo.Size.Y);
+	}
+
+	public override void Update()
+	{
+		if (playButton.Clicked) GameManager.StartGame();
 	}
 
 	public override void Render2D()

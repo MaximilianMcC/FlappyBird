@@ -115,6 +115,10 @@ class Pipe : RenderableComponent
 		{
 			// Say the player is dead
 			GameManager.GameOver = true;
+
+			// Show the restart button
+			CurrentScene.Get("RestartButton").Get<Button>().Enabled = true;
+
 			return;
 		}
 
