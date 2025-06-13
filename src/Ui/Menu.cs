@@ -49,5 +49,7 @@ class Menu : RenderableComponent
 	{
 		// Draw the logo
 		DrawTexture(Textures["logo"], logo, Color.White);
+
+		DrawText($"v{Project.Version.Major}.{Project.Version.Minor}", logo.BottomCorner + Vector2.UnitY * 20, Origin.BottomRight, 0f, 50f, Color.SkyBlue);
 	}
 }
